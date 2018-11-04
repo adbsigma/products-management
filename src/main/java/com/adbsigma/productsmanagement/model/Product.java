@@ -12,14 +12,16 @@ public class Product {
     private int id;
     private String nom;
     private int prix;
+    private int parentId;
 
     public Product() {
     }
 
-    public Product(int id, String nom, int prix) {
+    public Product(int id, String nom, int prix, int parentId) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
+        this.parentId = parentId;
     }
 
     public int getId() {
@@ -44,5 +46,13 @@ public class Product {
 
     public void setPrix(int prix) {
         this.prix = prix;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 }
