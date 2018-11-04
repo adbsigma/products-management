@@ -19,9 +19,10 @@ public class ProductController {
     //Récupérer la liste des produits
     @GetMapping(value="/Produits")
     public List<Product> listeProduits() {
-        return productDao.findAll();
-
+        Iterable<Product> produits = productDao.findAll();
+        return (List<Product>) produits;
     }
+
 
     //Récupérer un produit par son Id
     @GetMapping(value="/Produits/{id}")
@@ -45,5 +46,15 @@ public class ProductController {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping (value = "/Produits/{id}")
+    public void supprimerProduit(@PathVariable int id) {
+        productDao.deleteById(id);
+    }
+
+    @PutMapping (value = "/Produits")
+    public void updateProduit(@RequestBody Product product) {
+        productDao.save(product);
     }
 }
