@@ -5,21 +5,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Product {
+public class Category {
 
     @Id
     @GeneratedValue
     private int id;
     private String nom;
-    private int prix;
 
-    public Product() {
+    public Category() {
     }
 
-    public Product(int id, String nom, int prix) {
+    public Category(int id, String nom) {
         this.id = id;
         this.nom = nom;
-        this.prix = prix;
     }
 
     public int getId() {
@@ -36,13 +34,5 @@ public class Product {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public int getPrix() {
-        return prix;
-    }
-
-    public void setPrix(int prix) {
-        this.prix = prix;
     }
 }

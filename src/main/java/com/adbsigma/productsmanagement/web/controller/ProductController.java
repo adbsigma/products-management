@@ -30,12 +30,6 @@ public class ProductController {
         return productDao.findById(id);
     }
 
-    //Récupérer un produit par son ParentId
-    @GetMapping(value="/Produits/Categorie/{parentId}")
-    public List<Product> afficherUneCategorie(@PathVariable int parentId) {
-        return productDao.findByParentId(parentId);
-    }
-
     //ajouter un produit
     @PostMapping(value = "/Produits")
     public ResponseEntity<Void> ajouterProduit(@RequestBody Product product) {
