@@ -1,16 +1,28 @@
 package com.adbsigma.productsmanagement.web.controller;
+import com.adbsigma.productsmanagement.dao.ProductDao;
+import com.adbsigma.productsmanagement.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class ProductController {
 
+
+    @Autowired
+    private ProductDao productDao;
+
+    //Récupérer la liste des produits
     @GetMapping(value="/Produits")
-    public String listeProduits() {
-        return "Un exemple de produit";
+    public List<Product> listeProduits() {
+        return productDao.findAll();
+
     }
 
-    @GetMapping(value = "/Produits/{id}")
-    public String afficherUnProduit(@PathVariable int id) {
-        return "Vous avez demandé un produit avec l'id  " + id;
+    //Récupérer un produit par son Id
+    @GetMapping(value="/Produits/{id}")
+    public Product afficherUnProduit(@PathVariable int id) {
+        return productDao.findById(id);
     }
 }
