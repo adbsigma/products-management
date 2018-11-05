@@ -1,5 +1,7 @@
 package com.adbsigma.productsmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,20 +13,17 @@ public class Category {
     @GeneratedValue
     private int id;
     private String nom;
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private Category parent;
-    @OneToMany(mappedBy = "parent")
-    private Set<Category> children = new HashSet<Category>();
     @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
     private Set<Product> products;
 
     public Category() {
     }
 
-    public Category(int id, String nom) {
+    public Category(int id, String nom, Category parent, Set<Category> children, Set<Product> products) {
         this.id = id;
         this.nom = nom;
+        this.products = products;
     }
 
     public int getId() {
@@ -41,5 +40,23 @@ public class Category {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public void addProduct(Product product)
+    {
+        if(this==null)
+            System.out.println("ok");
+        if(product==null)
+            System.out.println("ok");
+        product.addToCategory(this);
+        products.add(product);
     }
 }

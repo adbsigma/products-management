@@ -1,6 +1,7 @@
 package com.adbsigma.productsmanagement.web.controller;
 import com.adbsigma.productsmanagement.dao.CategoryDao;
 import com.adbsigma.productsmanagement.dao.ProductDao;
+import com.adbsigma.productsmanagement.model.Category;
 import com.adbsigma.productsmanagement.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class ProductController {
@@ -57,5 +59,11 @@ public class ProductController {
     @PutMapping (value = "/Produits")
     public void updateProduit(@RequestBody Product product) {
         productDao.save(product);
+    }
+
+    @GetMapping (value = "/Produits/{id}/Categories")
+    public Set<Category> findProductCategoriesById(@PathVariable int id)
+    {
+        return productDao.findById(id).getCategories();
     }
 }
