@@ -11,16 +11,20 @@ public class Category {
     @GeneratedValue
     private int id;
     private String nom;
-    @ElementCollection
-    private Set<Integer> productsId = new HashSet();
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parent;
+    @OneToMany(mappedBy = "parent")
+    private Set<Category> children = new HashSet<Category>();
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products;
 
     public Category() {
     }
 
-    public Category(int id, String nom, Set<Integer> productsId) {
+    public Category(int id, String nom) {
         this.id = id;
         this.nom = nom;
-        this.productsId = productsId;
     }
 
     public int getId() {
@@ -37,13 +41,5 @@ public class Category {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public Set<Integer> getProductsId() {
-        return productsId;
-    }
-
-    public void setProductsId(Set<Integer> productsId) {
-        this.productsId = productsId;
     }
 }

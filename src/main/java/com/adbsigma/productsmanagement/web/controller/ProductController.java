@@ -1,4 +1,5 @@
 package com.adbsigma.productsmanagement.web.controller;
+import com.adbsigma.productsmanagement.dao.CategoryDao;
 import com.adbsigma.productsmanagement.dao.ProductDao;
 import com.adbsigma.productsmanagement.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
