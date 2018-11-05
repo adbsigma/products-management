@@ -1,8 +1,8 @@
 package com.adbsigma.productsmanagement.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -12,14 +12,17 @@ public class Product {
     private int id;
     private String nom;
     private int prix;
+    @ElementCollection
+    private Set<Integer> categoriesId = new HashSet();
 
     public Product() {
     }
 
-    public Product(int id, String nom, int prix) {
+    public Product(int id, String nom, int prix, Set<Integer> categoriesId) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
+        this.categoriesId = categoriesId;
     }
 
     public int getId() {
@@ -44,5 +47,13 @@ public class Product {
 
     public void setPrix(int prix) {
         this.prix = prix;
+    }
+
+    public Set<Integer> getCategoriesId() {
+        return categoriesId;
+    }
+
+    public void setCategoriesId(Set<Integer> categoriesId) {
+        this.categoriesId = categoriesId;
     }
 }
